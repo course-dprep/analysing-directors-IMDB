@@ -1,6 +1,6 @@
 ---
 title: "dPrep IMBd project"
-author: "Edwin van den Dikkenberg"
+author: "Team 3 dPrep"
 date: "2025-02-13"
 output: html_document
 ---
@@ -9,6 +9,24 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+# Research Motivation
+## Research question and method
+Renske
+
+
+
+
+## Way of deployment
+Joël
+
+
+## The potential use of this workflow
+An automated and reproducible workflow ensures transparency. This allows researchers to replicate and extend findings. The workflow facilitates comparative studies, and it saves time on the other hand. It also promotes open science by enabling collaboration. The workflow can be adapted for various film-related analyses and can be used as a valuable teaching tool for data-driven research. Students benefit from its structured approach and also simplify their projects. The reproducible workflow also enhances and ensures scientific integrity. Its adaptability encourages broader applications, and fosters knowledge-sharing in the scientific community.
+
+
+
+# Data Exploration
 ## Install and load required packages
 ```{r}
 library(tidyverse)
