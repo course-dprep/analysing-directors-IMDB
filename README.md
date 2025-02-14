@@ -18,7 +18,7 @@
 
 - What dataset(s) did you use? How was it obtained?
 - How many observations are there in the final dataset? 
-- Include a table of variable description/operstionalisation. 
+- Include a table of variable description/operationalisation. 
 
 ## Method
 
