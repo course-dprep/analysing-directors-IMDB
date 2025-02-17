@@ -18,17 +18,21 @@ By analyzing IMDb datasets, we will measure a director’s career length based o
 'Do directors with a long career have better-rated movies?'
 
 ## Data
-
-URLs list of the data sets required
+The research was conducted based on the following datasets extracted from imdb
 -  "title.basics" = "https://datasets.imdbws.com/title.basics.tsv.gz",
 -  "title.crew" = "https://datasets.imdbws.com/title.crew.tsv.gz",
 -  "title.ratings" = "https://datasets.imdbws.com/title.ratings.tsv.gz",
 -  "name.basics" = "https://datasets.imdbws.com/name.basics.tsv.gz"
 
-Still to add:
-- How many observations are in the final dataset?
-- Include a table of variable description/operationalization
+After merging the required data, a sample was taken to be able to conduct a more in-depth analysis. The final data set used extract the results contained entries.
 
+Variable description
+- Career_start: year of production of the first movie directed
+- Career_end: Year of production of the last movie directed
+- Career_length: total length of a director's career, calculated as career_end - career_start
+- Num_movies: total amount of movies produced per director
+- Avg_rating: average rating of movies produced rated from 0-10
+- Career_category: short (<10 years), medium (10-30 years), long (>30 years)
 
 ## Method
 
