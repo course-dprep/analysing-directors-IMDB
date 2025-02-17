@@ -18,7 +18,8 @@ Renske
 
 
 ## Way of deployment
-Joël
+To effectively communicate the findings, the results of the analysis will be presented through a combination of a structured PDF report and an interactive dashboard. The PDF report will provide a clear and concise summary of the research process, statistical findings, and key conclusions, ensuring accessibility for academic and industry professionals. Meanwhile, the interactive dashboard will allow users to explore the data dynamically, offering visual representations such as scatter plots and boxplots to illustrate trends in film ratings over a director’s career. This dual approach ensures that the study’s conclusions are both comprehensible and actionable for a broad audience, including researchers, filmmakers, and industry stakeholders.
+
 
 
 ## The potential use of this workflow
