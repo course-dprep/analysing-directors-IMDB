@@ -1,0 +1,195 @@
+---
+title: "dPrep IMBd project"
+author: "Team 3 dPrep"
+date: "2025-02-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Research Motivation
+## Research question and method
+Renske
+
+
+
+
+## Way of deployment
+To effectively communicate the findings, the results of the analysis will be presented through a combination of a structured PDF report and an interactive dashboard. The PDF report will provide a clear and concise summary of the research process, statistical findings, and key conclusions, ensuring accessibility for academic and industry professionals. Meanwhile, the interactive dashboard will allow users to explore the data dynamically, offering visual representations such as scatter plots and boxplots to illustrate trends in film ratings over a director’s career. This dual approach ensures that the study’s conclusions are both comprehensible and actionable for a broad audience, including researchers, filmmakers, and industry stakeholders.
+
+
+
+## The potential use of this workflow
+An automated and reproducible workflow ensures transparency. This allows researchers to replicate and extend findings. The workflow facilitates comparative studies, and it saves time on the other hand. It also promotes open science by enabling collaboration. The workflow can be adapted for various film-related analyses and can be used as a valuable teaching tool for data-driven research. Students benefit from its structured approach and also simplify their projects. The reproducible workflow also enhances and ensures scientific integrity. Its adaptability encourages broader applications, and fosters knowledge-sharing in the scientific community.
+
+
+
+# Data Exploration
+## Install and load required packages
+```{r}
+library(tidyverse)
+library(dplyr)
+library(readr)
+```
+
+
+## Step 1: Downloading and loading the IMBd data
+```{r}
+data_title_crew <- read_tsv("https://datasets.imdbws.com/title.crew.tsv.gz")
+data_title_basics <- read_tsv("https://datasets.imdbws.com/title.basics.tsv.gz")
+data_title_ratings <- read_tsv("https://datasets.imdbws.com/title.ratings.tsv.gz")
+data_name_basics <- read_tsv("https://datasets.imdbws.com/name.basics.tsv.gz")
+
+```
+
+
+## Step 2
+### 2.1 Filter for movies
+```{r}
+movies <- data_title_basics %>%
+  filter(titleType == "movie") %>%
+  select(tconst, primaryTitle, startYear)
+
+```
+
+### 2.2a Extract Director information
+```{r}
+directors <- data_title_crew %>%
+  select(tconst, directors) %>%
+  filter(!is.na(directors)) %>%
+  separate_rows(directors, sep = ",")
+```
+
+
+###  2.2b Replace "\N" in director dataset with actual NA's 
+```{r}
+directors <- directors %>%
+  mutate(directors = na_if(directors, "\\N"))
+```
+
+
+### 2.3a Merge director IDs with name.basics.tsv.gz to get birthYear and calculate career span.
+### inner_join is used so only matching rows are selected
+```{r}
+merged_director_data <- directors %>%
+  inner_join(data_name_basics, by = c("directors" = "nconst"))
+```
+
+### 2.3b Select relevant columns in merged director data set
+```{r}
+merged_director_data <- merged_director_data %>% 
+  select(directors, primaryName, birthYear, deathYear, tconst)
+
+```
+
+
+### 2.4a Merge director dataset with movies dataset
+```{r}
+data_director_career <- merged_director_data %>%
+  inner_join(movies, by = "tconst") %>%
+  group_by(directors)
+```
+
+
+### 2.4b Replace "\N" in dataset with actual NA's 
+```{r}
+data_director_career$birthYear[data_director_career$birthYear == "\\N"] <- NA 
+data_director_career$deathYear[data_director_career$deathYear == "\\N"] <- NA 
+data_director_career$startYear[data_director_career$startYear == "\\N"] <- NA 
+```
+
+
+### 2.4c Turn character values into numeric values for the year variables
+```{r}
+data_director_career$birthYear <- as.numeric(data_director_career$birthYear)
+data_director_career$deathYear <- as.numeric(data_director_career$deathYear)
+data_director_career$startYear <- as.numeric(data_director_career$startYear)
+```
+
+
+### 2.5 Compute career length in merged director/movie dataset
+```{r}
+data_director_career <- data_director_career %>% 
+summarise(
+    career_start = min(startYear),
+    career_end = max(startYear),
+    num_movies = n(),  # Count movies directed
+    .groups = "drop"
+  ) %>%
+  mutate(career_length = career_end - career_start)
+```
+
+### 2.6 Merge director career data with movie ratings data
+```{r}
+data_director_ratings <- directors %>%
+  inner_join(data_title_ratings, by = "tconst") %>%
+  group_by(directors) %>%
+  summarise(
+    avg_rating = mean(averageRating, na.rm = TRUE),
+    .groups = "drop"
+)
+```
+
+### 2.7 Final data (merge director career data with director ratings data)
+```{r}
+final_data <- data_director_career %>%
+  left_join(data_director_ratings, by = "directors") %>%
+  filter(!is.na(avg_rating))  # Remove missing rating
+
+```
+
+
+## Step 3: Statistical Analysis and Visualization
+### 3.1 Multiple Linear Regression Analysis
+```{r}
+model_1 <- lm(avg_rating ~ career_length + num_movies, data = final_data)
+summary(model_1)
+```
+
+
+### 3.2 Boxplot Analysis
+```{r}
+final_data <- final_data %>%
+  mutate(career_category = case_when(
+    career_length < 10 ~ "Short (<10 yrs)",
+    career_length >= 10 & career_length <= 30 ~ "Medium (10-30 yrs)",
+    career_length > 30 ~ "Long (>30 yrs)"
+  ))
+
+ggplot(na.omit(final_data), aes(x = career_category, y = avg_rating, fill = career_category)) +
+  geom_boxplot() +
+  labs(title = "IMDb Ratings by Director Career Length",
+       x = "Career Length Category",
+       y = "Average IMDb Rating") +
+  theme_minimal()
+
+```
+
+
+### 3.3 Scatter Plots: Career Length & Productivity vs Ratings
+```{r}
+ggplot(final_data, aes(x = career_length, y = avg_rating)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  labs(title = "Does Career Length Impact IMDb Ratings?",
+       x = "Career Length (Years)",
+       y = "Average IMDb Rating") +
+  theme_minimal()
+
+```
+
+
+### 3.4 Number of Movies Directed vs IMDb Rating
+```{r}
+ggplot(final_data, aes(x = num_movies, y = avg_rating)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(title = "Does Productivity Impact IMDb Ratings?",
+       x = "Number of Movies Directed",
+       y = "Average IMDb Rating") +
+  theme_minimal()
+
+```
