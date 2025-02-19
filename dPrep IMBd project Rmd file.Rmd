@@ -18,7 +18,7 @@ Renske
 
 
 ## Way of deployment
-Joël
+
 
 
 ## The potential use of this workflow
