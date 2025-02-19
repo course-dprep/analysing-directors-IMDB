@@ -12,16 +12,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Research Motivation
 ## Research question and method
-Renske
+This study aims to investigate whether directors with longer careers tend to produce higher-rated movies on IMDb. The research question, "Do directors with a long career have better-rated movies?", explores the relationship between career longevity and film quality. This question is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry.
 
+By analyzing IMDb datasets, we will measure a director’s career length based on the span between their first and last directed movie and compare this to the average IMDb ratings of their films. Additionally, the number of productions attributed to each director will be taken into account, allowing us to explore whether a higher volume of work influences overall ratings. The findings could provide insight into whether experience and productivity correlate with higher audience appreciation.
 
+To answer this question, a multiple regression analysis is chosen as the primary research method. Regression is well-suited for this study because it allows us to examine the relationship between a director’s career length and the average IMDb rating of their movies while also considering the number of productions they have directed. By applying a multiple linear regression model, we can determine whether a longer career and/or a higher number of directed movies are associated with better ratings, while controlling for potential variability. Additionally, a boxplot analysis is included to categorize directors into career-length groups, and a scatter plot will be used to explore the relationship between the number of movies directed and IMDb ratings. This combination of methods ensures a comprehensive and statistically sound approach to answering the research question.
 
 
 ## Way of deployment
-<<<<<<< HEAD
-=======
+
 To effectively communicate the findings, the results of the analysis will be presented through a combination of a structured PDF report and an interactive dashboard. The PDF report will provide a clear and concise summary of the research process, statistical findings, and key conclusions, ensuring accessibility for academic and industry professionals. Meanwhile, the interactive dashboard will allow users to explore the data dynamically, offering visual representations such as scatter plots and boxplots to illustrate trends in film ratings over a director’s career. This dual approach ensures that the study’s conclusions are both comprehensible and actionable for a broad audience, including researchers, filmmakers, and industry stakeholders.
->>>>>>> 3cf74f549919b7023be2319be8d44a84badc2fd3
+
 
 
 
