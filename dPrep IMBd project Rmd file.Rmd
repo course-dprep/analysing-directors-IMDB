@@ -3,8 +3,9 @@ title: "dPrep IMBd project"
 author: "Team 3 dPrep"
 date: "2025-02-13"
 output:
+  html_document:
+    df_print: paged
   pdf_document: default
-  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -33,7 +34,7 @@ An automated and reproducible workflow ensures transparency. This allows researc
 
 ## Install and load required packages
 
-```{r echo=TRUE, warning=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(dplyr)
 library(readr)
@@ -42,7 +43,7 @@ library(tinytex)
 
 ## Step 1: Downloading and loading the IMBd data
 
-```{r echo=TRUE, warning=FALSE}
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 data_title_crew <- read_tsv("https://datasets.imdbws.com/title.crew.tsv.gz")
 data_title_basics <- read_tsv("https://datasets.imdbws.com/title.basics.tsv.gz")
 data_title_ratings <- read_tsv("https://datasets.imdbws.com/title.ratings.tsv.gz")
@@ -70,7 +71,7 @@ directors <- data_title_crew %>%
   separate_rows(directors, sep = ",")
 ```
 
-### 2.2b Replace "\N" in director dataset with actual NA's
+### 2.2b Replace `"\\N"` in director dataset with actual NA's
 
 ```{r echo=TRUE, warning=FALSE}
 directors <- directors %>%
@@ -102,7 +103,7 @@ data_director_career <- merged_director_data %>%
   group_by(directors)
 ```
 
-### 2.4b Replace "\N" in dataset with actual NA's
+### 2.4b Replace `"\\N"` in dataset with actual NA's
 
 ```{r echo=TRUE, warning=FALSE}
 data_director_career$birthYear[data_director_career$birthYear == "\\N"] <- NA 
