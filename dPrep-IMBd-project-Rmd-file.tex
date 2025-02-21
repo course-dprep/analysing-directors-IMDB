@@ -1,0 +1,519 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={dPrep IMBd project},
+  pdfauthor={Team 3 dPrep},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{dPrep IMBd project}
+\author{Team 3 dPrep}
+\date{2025-02-13}
+
+\begin{document}
+\maketitle
+
+\section{Research Motivation}\label{research-motivation}
+
+\subsection{Research question and
+method}\label{research-question-and-method}
+
+This study aims to investigate whether directors with longer careers
+tend to produce higher-rated movies on IMDb. The research question, ``Do
+directors with a long career have better-rated movies?'', explores the
+relationship between career longevity and film quality. This question is
+relevant as it can provide insights into whether experience plays a
+significant role in filmmaking success, informing both aspiring and
+established directors, film producers, and scholars studying the film
+industry.
+
+By analyzing IMDb datasets, we will measure a director's career length
+based on the span between their first and last directed movie and
+compare this to the average IMDb ratings of their films. Additionally,
+the number of productions attributed to each director will be taken into
+account, allowing us to explore whether a higher volume of work
+influences overall ratings. The findings could provide insight into
+whether experience and productivity correlate with higher audience
+appreciation.
+
+To answer this question, a multiple regression analysis is chosen as the
+primary research method. Regression is well-suited for this study
+because it allows us to examine the relationship between a director's
+career length and the average IMDb rating of their movies while also
+considering the number of productions they have directed. By applying a
+multiple linear regression model, we can determine whether a longer
+career and/or a higher number of directed movies are associated with
+better ratings, while controlling for potential variability.
+Additionally, a boxplot analysis is included to categorize directors
+into career-length groups, and a scatter plot will be used to explore
+the relationship between the number of movies directed and IMDb ratings.
+This combination of methods ensures a comprehensive and statistically
+sound approach to answering the research question.
+
+\subsection{Way of deployment}\label{way-of-deployment}
+
+To effectively communicate the findings, the results of the analysis
+will be presented through a combination of a structured PDF report and
+an interactive dashboard. The PDF report will provide a clear and
+concise summary of the research process, statistical findings, and key
+conclusions, ensuring accessibility for academic and industry
+professionals. Meanwhile, the interactive dashboard will allow users to
+explore the data dynamically, offering visual representations such as
+scatter plots and boxplots to illustrate trends in film ratings over a
+director's career. This dual approach ensures that the study's
+conclusions are both comprehensible and actionable for a broad audience,
+including researchers, filmmakers, and industry stakeholders.
+
+\subsection{The potential use of this
+workflow}\label{the-potential-use-of-this-workflow}
+
+An automated and reproducible workflow ensures transparency. This allows
+researchers to replicate and extend findings. The workflow facilitates
+comparative studies, and it saves time on the other hand. It also
+promotes open science by enabling collaboration. The workflow can be
+adapted for various film-related analyses and can be used as a valuable
+teaching tool for data-driven research. Students benefit from its
+structured approach and also simplify their projects. The reproducible
+workflow also enhances and ensures scientific integrity. Its
+adaptability encourages broader applications, and fosters
+knowledge-sharing in the scientific community.
+
+\section{Data Exploration}\label{data-exploration}
+
+\subsection{Install and load required
+packages}\label{install-and-load-required-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(tinytex)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 1: Downloading and loading the IMBd
+data}\label{step-1-downloading-and-loading-the-imbd-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_title\_crew }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(}\StringTok{"https://datasets.imdbws.com/title.crew.tsv.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 11464895 Columns: 3
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr (3): tconst, directors, writers
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_title\_basics }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(}\StringTok{"https://datasets.imdbws.com/title.basics.tsv.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 11464895 Columns: 9
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr (8): tconst, titleType, primaryTitle, originalTitle, startYear, endYear,...
+## dbl (1): isAdult
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_title\_ratings }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(}\StringTok{"https://datasets.imdbws.com/title.ratings.tsv.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 1535911 Columns: 3
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr (1): tconst
+## dbl (2): averageRating, numVotes
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_name\_basics }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(}\StringTok{"https://datasets.imdbws.com/name.basics.tsv.gz"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 14195120 Columns: 6
+## -- Column specification --------------------------------------------------------
+## Delimiter: "\t"
+## chr (6): nconst, primaryName, birthYear, deathYear, primaryProfession, known...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\subsection{Step 2}\label{step-2}
+
+\subsubsection{2.1 Filter for movies}\label{filter-for-movies}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies }\OtherTok{\textless{}{-}}\NormalTok{ data\_title\_basics }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(titleType }\SpecialCharTok{==} \StringTok{"movie"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(tconst, primaryTitle, startYear)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.2a Extract Director
+information}\label{a-extract-director-information}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{directors }\OtherTok{\textless{}{-}}\NormalTok{ data\_title\_crew }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(tconst, directors) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(directors)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate\_rows}\NormalTok{(directors, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{2.2b Replace ``\N'' in director dataset
+with actual
+NA's}{2.2b Replace ``\,'' in director dataset with actual NA's}}\label{b-replace-in-director-dataset-with-actual-nas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{directors }\OtherTok{\textless{}{-}}\NormalTok{ directors }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{directors =} \FunctionTok{na\_if}\NormalTok{(directors, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{N"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.3a Merge director IDs with name.basics.tsv.gz to get
+birthYear and calculate career
+span.}\label{a-merge-director-ids-with-name.basics.tsv.gz-to-get-birthyear-and-calculate-career-span.}
+
+\subsubsection{inner\_join is used so only matching rows are
+selected}\label{inner_join-is-used-so-only-matching-rows-are-selected}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merged\_director\_data }\OtherTok{\textless{}{-}}\NormalTok{ directors }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(data\_name\_basics, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"directors"} \OtherTok{=} \StringTok{"nconst"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.3b Select relevant columns in merged director data
+set}\label{b-select-relevant-columns-in-merged-director-data-set}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{merged\_director\_data }\OtherTok{\textless{}{-}}\NormalTok{ merged\_director\_data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(directors, primaryName, birthYear, deathYear, tconst)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.4a Merge director dataset with movies
+dataset}\label{a-merge-director-dataset-with-movies-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_director\_career }\OtherTok{\textless{}{-}}\NormalTok{ merged\_director\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(movies, }\AttributeTok{by =} \StringTok{"tconst"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(directors)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{\texorpdfstring{2.4b Replace ``\N'' in dataset with
+actual
+NA's}{2.4b Replace ``\,'' in dataset with actual NA's}}\label{b-replace-in-dataset-with-actual-nas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{birthYear[data\_director\_career}\SpecialCharTok{$}\NormalTok{birthYear }\SpecialCharTok{==} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{N"}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA} 
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{deathYear[data\_director\_career}\SpecialCharTok{$}\NormalTok{deathYear }\SpecialCharTok{==} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{N"}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA} 
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{startYear[data\_director\_career}\SpecialCharTok{$}\NormalTok{startYear }\SpecialCharTok{==} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{N"}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA} 
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.4c Turn character values into numeric values for the
+year
+variables}\label{c-turn-character-values-into-numeric-values-for-the-year-variables}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{birthYear }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(data\_director\_career}\SpecialCharTok{$}\NormalTok{birthYear)}
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{deathYear }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(data\_director\_career}\SpecialCharTok{$}\NormalTok{deathYear)}
+\NormalTok{data\_director\_career}\SpecialCharTok{$}\NormalTok{startYear }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(data\_director\_career}\SpecialCharTok{$}\NormalTok{startYear)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.5 Compute career length in merged director/movie
+dataset}\label{compute-career-length-in-merged-directormovie-dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_director\_career }\OtherTok{\textless{}{-}}\NormalTok{ data\_director\_career }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{career\_start =} \FunctionTok{min}\NormalTok{(startYear),}
+    \AttributeTok{career\_end =} \FunctionTok{max}\NormalTok{(startYear),}
+    \AttributeTok{num\_movies =} \FunctionTok{n}\NormalTok{(),  }\CommentTok{\# Count movies directed}
+    \AttributeTok{.groups =} \StringTok{"drop"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{career\_length =}\NormalTok{ career\_end }\SpecialCharTok{{-}}\NormalTok{ career\_start)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.6 Merge director career data with movie ratings
+data}\label{merge-director-career-data-with-movie-ratings-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_director\_ratings }\OtherTok{\textless{}{-}}\NormalTok{ directors }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{inner\_join}\NormalTok{(data\_title\_ratings, }\AttributeTok{by =} \StringTok{"tconst"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(directors) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{avg\_rating =} \FunctionTok{mean}\NormalTok{(averageRating, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{.groups =} \StringTok{"drop"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{2.7 Final data (merge director career data with director
+ratings
+data)}\label{final-data-merge-director-career-data-with-director-ratings-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final\_data }\OtherTok{\textless{}{-}}\NormalTok{ data\_director\_career }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(data\_director\_ratings, }\AttributeTok{by =} \StringTok{"directors"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(avg\_rating))  }\CommentTok{\# Remove missing rating}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 3: Statistical Analysis and
+Visualization}\label{step-3-statistical-analysis-and-visualization}
+
+\subsubsection{3.1 Multiple Linear Regression
+Analysis}\label{multiple-linear-regression-analysis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(avg\_rating }\SpecialCharTok{\textasciitilde{}}\NormalTok{ career\_length }\SpecialCharTok{+}\NormalTok{ num\_movies, }\AttributeTok{data =}\NormalTok{ final\_data)}
+\FunctionTok{summary}\NormalTok{(model\_1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = avg_rating ~ career_length + num_movies, data = final_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.5530 -0.7530  0.1470  0.8978  3.6678 
+## 
+## Coefficients:
+##                 Estimate Std. Error  t value Pr(>|t|)    
+## (Intercept)    6.5620623  0.0042001 1562.374  < 2e-16 ***
+## career_length -0.0015627  0.0004572   -3.418 0.000632 ***
+## num_movies    -0.0091024  0.0005640  -16.138  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.34 on 138152 degrees of freedom
+##   (23714 observations deleted due to missingness)
+## Multiple R-squared:  0.003307,   Adjusted R-squared:  0.003292 
+## F-statistic: 229.2 on 2 and 138152 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\subsubsection{3.2 Boxplot Analysis}\label{boxplot-analysis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{final\_data }\OtherTok{\textless{}{-}}\NormalTok{ final\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{career\_category =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    career\_length }\SpecialCharTok{\textless{}} \DecValTok{10} \SpecialCharTok{\textasciitilde{}} \StringTok{"Short (\textless{}10 yrs)"}\NormalTok{,}
+\NormalTok{    career\_length }\SpecialCharTok{\textgreater{}=} \DecValTok{10} \SpecialCharTok{\&}\NormalTok{ career\_length }\SpecialCharTok{\textless{}=} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"Medium (10{-}30 yrs)"}\NormalTok{,}
+\NormalTok{    career\_length }\SpecialCharTok{\textgreater{}} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"Long (\textgreater{}30 yrs)"}
+\NormalTok{  ))}
+
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{na.omit}\NormalTok{(final\_data), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ career\_category, }\AttributeTok{y =}\NormalTok{ avg\_rating, }\AttributeTok{fill =}\NormalTok{ career\_category)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"IMDb Ratings by Director Career Length"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Career Length Category"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average IMDb Rating"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{dPrep-IMBd-project-Rmd-file_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\subsubsection{3.3 Scatter Plots: Career Length \& Productivity vs
+Ratings}\label{scatter-plots-career-length-productivity-vs-ratings}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(final\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ career\_length, }\AttributeTok{y =}\NormalTok{ avg\_rating)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Does Career Length Impact IMDb Ratings?"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Career Length (Years)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average IMDb Rating"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{dPrep-IMBd-project-Rmd-file_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\subsubsection{3.4 Number of Movies Directed vs IMDb
+Rating}\label{number-of-movies-directed-vs-imdb-rating}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(final\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ num\_movies, }\AttributeTok{y =}\NormalTok{ avg\_rating)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Does Productivity Impact IMDb Ratings?"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Movies Directed"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average IMDb Rating"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{dPrep-IMBd-project-Rmd-file_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\end{document}
