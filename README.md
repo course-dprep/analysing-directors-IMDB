@@ -39,13 +39,6 @@ Variable description
 | avg_rating  |  average rating of movies produced rated from 0-10  |
 | career_category |  short (<10 years), medium (10-30 years), long (>30 years) |
 
-- Career_start: year of production of the first movie directed
-- Career_end: Year of production of the last movie directed
-- Career_length: total length of a director's career, calculated as career_end - career_start
-- Num_movies: total amount of movies produced per director
-- Avg_rating: average rating of movies produced rated from 0-10
-- Career_category: short (<10 years), medium (10-30 years), long (>30 years)
-
 ## Method
 
 To answer this question, a multiple regression analysis is chosen as the primary research method. Regression is well-suited for this study because it allows us to examine the relationship between a director’s career length and the average IMDb rating of their movies while also considering the number of productions they have directed. By applying a multiple linear regression model, we can determine whether a longer career and/or a higher number of directed movies are associated with better ratings, while controlling for potential variability. Additionally, a boxplot analysis is included to categorize directors into career-length groups, and a scatter plot will be used to explore the relationship between the number of movies directed and IMDb ratings. This combination of methods ensures a comprehensive and statistically sound approach to answering the research question.
@@ -53,6 +46,8 @@ To answer this question, a multiple regression analysis is chosen as the primary
 
 ## Preview of Findings 
 To investigate the effect of career length (short vs medium vs long) and the amount of movies produced per director on average movie ratings, a multiple linear regression was conducted. The output is as follows:
+
+| Term | Estimate | Std. Error | t value | Pr(>|t|) | |--------------|----------|------------|---------|----------| | (Intercept) | 6.5620 | 0.0042 | 1563.015 | <2e-16 | | career_length | -0.0016 | 0.000457 | -3.439 | 0.000585 | | num_movies | -0.0091 | 0.000564 | -16.162 | <2e-16 |
 
 Based on this regression table, the effect of both career length and the amount of movies produced per director is significant. 
 
