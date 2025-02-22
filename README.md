@@ -42,23 +42,6 @@ To answer this question, a multiple regression analysis is chosen as the primary
 ## Preview of Findings 
 To investigate the effect of career length (short vs medium vs long) and the amount of movies produced per director on average movie ratings, a multiple linear regression was conducted. The output is as follows:
 
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.5529 -0.7529  0.1471  0.8995  3.6716 
-
-Coefficients:
-                Estimate Std. Error  t value Pr(>|t|)    
-(Intercept)    6.5620379  0.0041983 1563.015  < 2e-16 ***
-career_length -0.0015717  0.0004571   -3.439 0.000585 ***
-num_movies    -0.0091170  0.0005641  -16.162  < 2e-16 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 1.339 on 138201 degrees of freedom
-  (23695 observations deleted due to missingness)
-Multiple R-squared:  0.003319,	Adjusted R-squared:  0.003305 
-F-statistic: 230.1 on 2 and 138201 DF,  p-value: < 2.2e-16
-
 Based on this regression table, the effect of both career length and the amount of movies produced per director is significant. 
 
 - Describe the gist of your findings (save the details for the final paper!)
