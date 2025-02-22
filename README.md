@@ -12,6 +12,8 @@
 
 This study is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry
 
+
+
 By analyzing IMDb datasets, we will measure a director’s career length based on the span between their first and last directed movie and compare this to the average IMDb ratings of their films. Additionally, the number of productions attributed to each director will be taken into account, allowing us to explore whether a higher volume of work influences overall ratings. The findings could provide insight into whether experience and productivity correlate with higher audience appreciation
 
 ## Research question
@@ -27,6 +29,16 @@ The research was conducted based on the following datasets extracted from imdb
 After merging the required data, a sample was taken to be able to conduct a more in-depth analysis. The final data set used extract the results contained entries.
 
 Variable description
+
+| Variable name     | Variable explanation | 
+|--------------|--------------------|
+| career_start  | year of production of the first movie directed                 | 
+| career_end | year of production of the last movie directed                 | 
+| career_length  |   total length of a director's career, calculated as career_end - career_start               | 
+| num_movies  |  total amount of movies produced per director  |
+| avg_rating  |  average rating of movies produced rated from 0-10  |
+| career_category |  short (<10 years), medium (10-30 years), long (>30 years) |
+
 - Career_start: year of production of the first movie directed
 - Career_end: Year of production of the last movie directed
 - Career_length: total length of a director's career, calculated as career_end - career_start
