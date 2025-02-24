@@ -47,13 +47,16 @@ To answer this question, a multiple regression analysis is chosen as the primary
 ## Preview of Findings 
 To investigate the effect of career length (short vs medium vs long) and the amount of movies produced per director on average movie ratings, a multiple linear regression was conducted. The output is as follows:
 
-| Term | Estimate | Std. Error | t value | Pr(>|t|) | |--------------|----------|------------|---------|----------| | (Intercept) | 6.5620 | 0.0042 | 1563.015 | <2e-16 | | career_length | -0.0016 | 0.000457 | -3.439 | 0.000585 | | num_movies | -0.0091 | 0.000564 | -16.162 | <2e-16 |
+INSERT SUMMARY OF THE MULTIPLE REGRESSION TABLE
 
-Based on this regression table, the effect of both career length and the amount of movies produced per director is significant. 
+Based on this regression table, both career length and the amount of movies produced has a significant effect on the average movie ratings. A negative trend can be observed for both variables, however, the effect is stronger for the amount of movies produced as for the career length. This is better visible in the scatter plots included in the Rmd file.
 
-- Describe the gist of your findings (save the details for the final paper!)
-- How are the findings/end product of the project deployed?
-- Explain the relevance of these findings/product. 
+The regression findings provide valuable insights for the film industry, guiding decisions in talent selection, budget allocation, and marketing strategies. For professionals such as producers and studio executives, the data suggests that directors with longer careers may produce films with declining ratings over time. This could prompt studios to focus on directors with shorter, more consistent track records and allocate budgets to those prioritizing quality over quantity. Marketing efforts could also emphasize high-rated works rather than an entire career.
+
+For streaming platforms like Netflix and Amazon Prime, the results are important for selecting content and adjusting recommendation algorithms. Platforms may prefer directors with a consistent record of quality work and could focus on emerging filmmakers rather than established ones with declining ratings. This strategy helps maintain a balance between new talent and well-known directors.
+
+Academically, the study opens avenues for research on the impact of career longevity on creative output, exploring whether long careers contribute positively or negatively to film quality. It also invites comparisons with other creative industries like music and literature, highlighting potential industry-specific trends and the influence of genre demands on a director's performance.
+
 
 ## Repository Overview 
 
