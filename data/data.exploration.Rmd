@@ -1,0 +1,80 @@
+---
+title: "Data Exploration"
+author: "Edwin van den Dikkenberg"
+date: "2025-03-07"
+output: html_document
+---
+
+## Load packages
+```{r setup, include=FALSE}
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(tinytex)
+
+```
+
+## Loading datasets
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(include = FALSE)
+data_title_crew <- read_tsv("title.crew.tsv.gz", na = "\\N")
+data_title_basics <- read_tsv("title.basics.tsv.gz", na =  "\\N")
+data_title_ratings <- read_tsv("title.ratings.tsv.gz", na = "\\N")
+data_name_basics <- read_tsv("name.basics.tsv.gz", na = "\\N")
+```
+
+
+## Understanding Data Structure
+### View the first rows 
+```{r echo=TRUE}
+capture.output(print(head(data_name_basics)))
+capture.output(print(head(data_title_basics)))
+capture.output(print(head(data_title_crew)))
+capture.output(print(head(data_title_ratings)))
+```
+
+### Get dataset dimensions (rows, columns)
+```{r echo=TRUE, warning=FALSE, results='markup'}
+dim(data_name_basics)
+dim(data_title_basics)
+dim(data_title_crew)
+dim(data_title_ratings)
+```
+
+### Check column names
+```{r echo=TRUE, warning=FALSE, results='markup'}
+colnames(data_name_basics)
+colnames(data_title_basics)
+colnames(data_title_crew)
+colnames(data_title_ratings)
+```
+
+### Overview of data types
+```{r}
+capture.output(glimpse(data_name_basics))
+capture.output(glimpse(data_title_basics))
+capture.output(glimpse(data_title_crew))
+capture.output(glimpse(data_title_ratings))
+```
+
+### Summary statistics for numeric variables (only numeric in title_ratings)
+```{r echo=TRUE, warning=FALSE, results='markup'}
+data_title_ratings %>% summarise(across(where(is.numeric), ~mean(.x, na.rm = TRUE)))
+```
+
+### Count total missing values in each column
+```{r echo=TRUE, warning=FALSE, results='markup'}
+data_name_basics %>% summarise(across(everything(), ~sum(is.na(.))))
+data_title_basics %>% summarise(across(everything(), ~sum(is.na(.))))
+data_title_crew %>% summarise(across(everything(), ~sum(is.na(.))))
+data_title_ratings %>% summarise(across(everything(), ~sum(is.na(.))))
+```
+
+### Percentage of missing values per column
+```{r echo=TRUE, warning=FALSE, results='markup'}
+data_name_basics %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
+data_title_basics %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
+data_title_crew %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
+data_title_ratings %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
+```
+

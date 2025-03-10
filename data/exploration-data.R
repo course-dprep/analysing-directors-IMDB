@@ -6,13 +6,6 @@ library(dplyr)
 library(readr)
 library(tinytex)
 
-## Load needed data (temporary)
-data_title_crew <- read_tsv("https://datasets.imdbws.com/title.crew.tsv.gz")
-data_title_basics <- read_tsv("https://datasets.imdbws.com/title.basics.tsv.gz")
-data_title_ratings <- read_tsv("https://datasets.imdbws.com/title.ratings.tsv.gz")
-data_name_basics <- read_tsv("https://datasets.imdbws.com/name.basics.tsv.gz")  
-
-
 ## Understanding Data Structure
 # View the first rows
 head(data_name_basics)
@@ -64,4 +57,6 @@ data_name_basics %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
 data_title_basics %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
 data_title_crew %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
 data_title_ratings %>% summarise(across(everything(), ~mean(is.na(.)) * 100))
+
+
 
