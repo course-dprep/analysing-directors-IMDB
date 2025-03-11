@@ -17,10 +17,10 @@ library(tinytex)
 ## Loading datasets
 ```{r setup2, include=FALSE}
 knitr::opts_chunk$set(include = FALSE)
-data_title_crew <- read_tsv("title.crew.tsv.gz", na = "\\N")
-data_title_basics <- read_tsv("title.basics.tsv.gz", na =  "\\N")
-data_title_ratings <- read_tsv("title.ratings.tsv.gz", na = "\\N")
-data_name_basics <- read_tsv("name.basics.tsv.gz", na = "\\N")
+data_title_crew <- read_tsv("/../../title.crew.tsv.gz", na = "\\N")
+data_title_basics <- read_tsv("/../../title.basics.tsv.gz", na =  "\\N")
+data_title_ratings <- read_tsv("/../../title.ratings.tsv.gz", na = "\\N")
+data_name_basics <- read_tsv("/../../name.basics.tsv.gz", na = "\\N")
 ```
 
 
