@@ -1,50 +1,42 @@
-# In this directory, you will keep all source code files relevant for 
-# preparing/cleaning your data.
+# Cleaning every dataset
 
----
-title: "Data Cleaning"
-author: "Paulien Beeker"
-date: "2025-03-13"
-output: pdf_document
----
+## Load required packages
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(tinytex)
 
-## Filtering for movies
+## Loading in data and turning "\N" into actual NA
+data_title_crew <- read_tsv("data/title.crew.tsv.gz", na = "\\N")
+data_title_basics <- read_tsv("data/title.basics.tsv.gz", na =  "\\N")
+data_title_ratings <- read_tsv("data/title.ratings.tsv.gz", na = "\\N")
+data_name_basics <- read_tsv("data/name.basics.tsv.gz", na = "\\N")
 
-```{r echo=TRUE, warning=FALSE}
+# 1.1 Filter for movies
 movies <- data_title_basics %>%
   filter(titleType == "movie") %>%
   select(tconst, primaryTitle, startYear)
 
-```
-
-## Extracting Director information
-
-```{r echo=TRUE, warning=FALSE}
-directors <- data_title_crew %>%
+# 1.2 Extract directors information
+directors_movie_info <- data_title_crew %>%
   select(tconst, directors) %>%
   filter(!is.na(directors)) %>%
   separate_rows(directors, sep = ",")
-```
 
-## Replacing `"\\N"` in director dataset with actual NA's
+# 1.3 Clean name.basics dataset
+directors_personal_info <- data_name_basics %>%
+  select(nconst, primaryName, birthYear, deathYear)
 
-```{r echo=TRUE, warning=FALSE}
-directors <- directors %>%
-  mutate(directors = na_if(directors, "\\N"))
-```
+# 1.4 Convert year columns to numeric
+directors_personal_info$birthYear <- as.numeric(directors_personal_info$birthYear)
+directors_personal_info$deathYear <- as.numeric(directors_personal_info$deathYear)
+movies$startYear <- as.numeric(movies$startYear)
 
-## Replacing `"\\N"` in dataset with actual NA's
+# 1.5 Renaming data_title_ratings
+title_ratings <- data_title_ratings
 
-```{r echo=TRUE, warning=FALSE}
-data_director_career$birthYear[data_director_career$birthYear == "\\N"] <- NA 
-data_director_career$deathYear[data_director_career$deathYear == "\\N"] <- NA 
-data_director_career$startYear[data_director_career$startYear == "\\N"] <- NA 
-```
-
-## Turning character values into numeric values for the year variables
-
-```{r echo=TRUE, warning=FALSE}
-data_director_career$birthYear <- as.numeric(data_director_career$birthYear)
-data_director_career$deathYear <- as.numeric(data_director_career$deathYear)
-data_director_career$startYear <- as.numeric(data_director_career$startYear)
-```
+# 1.6 Putting cleaned datasets into gen/temp folder
+write_tsv(movies, "gen/temp/movies.tsv.gz")
+write_tsv(directors_movie_info, "gen/temp/directors_movie_info.tsv.gz")
+write_tsv(directors_personal_info,"gen/temp/directors_personal_info.tsv.gz")
+write_tsv(title_ratings,"gen/temp/title_ratings.tsv.gz")

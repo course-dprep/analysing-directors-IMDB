@@ -1,65 +1,48 @@
----
-title: "Data Merging"
-author: "Pauien Beeker"
-date: "2025-03-13"
-output: pdf_document
----
+# Merging the cleaned datasets
 
-## Merging director IDs with name.basics.tsv.gz to get birthYear and calculate career span.
+## Load required packages
+library(tidyverse)
+library(dplyr)
+library(readr)
+library(tinytex)
 
-### inner_join is used so only matching rows are selected
+## Loading in data
+movies <- read_tsv("gen/temp/movies.tsv.gz")
+directors_movie_info <- read_tsv("gen/temp/directors_movie_info.tsv.gz")
+directors_personal_info <- read_tsv("gen/temp/directors_personal_info.tsv.gz")
+title_ratings <- read_tsv("gen/temp/title_ratings.tsv.gz")
 
-```{r echo=TRUE, warning=FALSE}
-merged_director_data <- directors %>%
-  inner_join(data_name_basics, by = c("directors" = "nconst"))
-```
-
-## Selecting relevant columns in merged director data set
-
-```{r echo=TRUE, warning=FALSE}
-merged_director_data <- merged_director_data %>% 
+# 1.1 Merge directors movie and personal information
+merged_directors_data <- directors_movie_info %>%
+  inner_join(directors_personal_info, by = c("directors" = "nconst")) %>%
   select(directors, primaryName, birthYear, deathYear, tconst)
 
-```
 
-## Merging director dataset with movies dataset
-
-```{r echo=TRUE, warning=FALSE}
-data_director_career <- merged_director_data %>%
+# 1.2 Merge directors dataset with movies dataset
+data_directors_career <- merged_directors_data %>%
   inner_join(movies, by = "tconst") %>%
-  group_by(directors)
-```
-
-## Computing career length in merged director/movie dataset
-
-```{r echo=TRUE, warning=FALSE}
-data_director_career <- data_director_career %>% 
-summarise(
-    career_start = min(startYear),
-    career_end = max(startYear),
+  group_by(directors) %>%
+  summarise(
+    career_start = min(startYear, na.rm = TRUE),
+    career_end = max(startYear, na.rm = TRUE),
     num_movies = n(),  # Count movies directed
+    career_length = career_end - career_start,
     .groups = "drop"
-  ) %>%
-  mutate(career_length = career_end - career_start)
-```
+  )
 
-## Merging director career data with movie ratings data
-
-```{r echo=TRUE, warning=FALSE}
-data_director_ratings <- directors %>%
-  inner_join(data_title_ratings, by = "tconst") %>%
+# 1.3 Merge directors dataset with movie ratings data
+data_directors_ratings <- directors_movie_info %>%
+  inner_join(title_ratings, by = "tconst") %>%
   group_by(directors) %>%
   summarise(
     avg_rating = mean(averageRating, na.rm = TRUE),
     .groups = "drop"
-)
-```
+  )
 
-## Final data (merge director career data with director ratings data)
+# 1.4 Final dataset merging career data with ratings data
+final_data <- data_directors_career %>%
+  left_join(data_directors_ratings, by = "directors") %>%
+  filter(!is.na(avg_rating))  # Remove missing ratings
 
-```{r echo=TRUE, warning=FALSE}
-final_data <- data_director_career %>%
-  left_join(data_director_ratings, by = "directors") %>%
-  filter(!is.na(avg_rating))  # Remove missing rating
-
-```
+# 1.5 Putting final dataset into gen/temp folder
+write_tsv(final_data, "gen/temp/complete_directors_data.tsv.gz")
