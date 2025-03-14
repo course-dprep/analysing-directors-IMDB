@@ -1,4 +1,4 @@
-all: ../../gen/output/data.exploration.pdf
+all: ../../gen/output/data.exploration.pdf gen/output/model_summary.pdf gen/output/productivity_vs_rating.pdf gen/output/box_plot.pdf gen/output/scatter_plot.pdf
 
 # Step 1: Downloading data
 data/title.crew.tsv.gz data/title.basics.tsv.gz data/title.ratings.tsv.gz data/name.basics.tsv.gz: src/data-download/download-data.R
@@ -18,6 +18,11 @@ gen/temp/movies.tsv.gz gen/temp/directors_movie_info.tsv.gz gen/temp/directors_p
 gen/temp/complete_directors_data.tsv.gz: src/data-preparation/data-merging.R gen/temp/movies.tsv.gz gen/temp/directors_movie_info.tsv.gz gen/temp/directors_personal_info.tsv.gz gen/temp/title_ratings.tsv.gz
 	Rscript src/data-preparation/data-merging.R
 
+# Step 5: Analysis
+gen/output/model_summary.pdf gen/output/productivity_vs_rating.pdf gen/output/box_plot.pdf gen/output/scatter_plot.pdf: src/analysis/analysis.R gen/temp/complete_directors_data.tsv.gz
+	Rscript src/analysis/analysis.R
+
 # Platform-independent clean rule
 clean:
-	R -e "unlink('gen', recursive = TRUE)"
+	R -e "unlink('data', recursive = TRUE)"
+	R -e "unlink('gen', recursive = TRUE, force = TRUE)"

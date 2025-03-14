@@ -44,5 +44,12 @@ final_data <- data_directors_career %>%
   left_join(data_directors_ratings, by = "directors") %>%
   filter(!is.na(avg_rating))  # Remove missing ratings
 
-# 1.5 Putting final dataset into gen/temp folder
+# 1.5 Changing -Inf/Inf values into regular NA's
+final_data[!is.finite(final_data$career_start), "career_start"] <- NA
+final_data[!is.finite(final_data$career_end), "career_end"] <- NA
+final_data[!is.finite(final_data$career_length), "career_length"] <- NA
+final_data[!is.finite(final_data$num_movies), "num_movies"] <- NA
+
+
+# 1.6 Putting final dataset into gen/temp folder
 write_tsv(final_data, "gen/temp/complete_directors_data.tsv.gz")
