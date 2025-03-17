@@ -1,10 +1,12 @@
 # Analysis of the final directors dataset
 
-## Load required packages
+## Load/install required packages
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse")
 library(tidyverse)
 library(dplyr)
 library(readr)
 library(tinytex)
+if (!requireNamespace("gplots", quietly = TRUE)) install.packages("gplots")
 library(gplots)
 
 ## Loading in merged directors dataset 
@@ -17,10 +19,13 @@ model_1 <- lm(avg_rating ~ career_length + num_movies, data = final_data)
 ## 1.1b Specify the path to save the PDF
 pdf("gen/output/model_summary.pdf")
 
-## 1.1c Print the summary to the PDF
-textplot(capture.output(summary(model_1)))
+# Capture the summary as text
+summary_text <- capture.output(summary(model_1))
 
-# 1.1d Close the PDF device
+# Print the summary using textplot
+textplot(summary_text, halign = "left", valign = "top", cex = 0.8)
+
+## 1.1e Close the PDF device
 dev.off()
 
 

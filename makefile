@@ -20,6 +20,7 @@ gen/temp/complete_directors_data.tsv.gz: src/data-preparation/data-merging.R gen
 
 # Step 5: Analysis
 gen/output/model_summary.pdf gen/output/productivity_vs_rating.pdf gen/output/box_plot.pdf gen/output/scatter_plot.pdf: src/analysis/analysis.R gen/temp/complete_directors_data.tsv.gz
+	Rscript -e "if (!dir.exists('gen/output')) dir.create('gen/output', recursive = TRUE)"
 	Rscript src/analysis/analysis.R
 
 # Platform-independent clean rule
