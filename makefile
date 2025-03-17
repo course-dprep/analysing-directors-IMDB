@@ -2,6 +2,7 @@ all: ../../gen/output/data.exploration.pdf gen/output/model_summary.pdf gen/outp
 
 # Step 1: Downloading data
 data/title.crew.tsv.gz data/title.basics.tsv.gz data/title.ratings.tsv.gz data/name.basics.tsv.gz: src/data-download/download-data.R
+	Rscript -e "if (!dir.exists('data')) dir.create('data', recursive = TRUE)"
 	Rscript src/data-download/download-data.R
 
 # Step 2: Data exploration 

@@ -5,7 +5,7 @@ library(tidyverse)
 library(dplyr)
 library(readr)
 library(tinytex)
-library(gplots)
+library(ggplot2)
 
 ## Loading in merged directors dataset 
 final_data <- read_tsv("gen/temp/complete_directors_data.tsv.gz")
@@ -18,7 +18,11 @@ model_1 <- lm(avg_rating ~ career_length + num_movies, data = final_data)
 pdf("gen/output/model_summary.pdf")
 
 ## 1.1c Print the summary to the PDF
-textplot(capture.output(summary(model_1)))
+summary_text <- paste(capture.output(summary(model_1)), collapse = "\n")
+
+ggplot() +
+  annotate("text", x = 0.5, y = 0.5, label = summary_text, hjust = 0, vjust = 1, size = 4, family = "mono") +
+  theme_void()
 
 # 1.1d Close the PDF device
 dev.off()
