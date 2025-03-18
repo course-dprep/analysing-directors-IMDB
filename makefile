@@ -20,7 +20,7 @@ gen/temp/complete_directors_data.tsv.gz: src/data-preparation/data-merging.R gen
 	Rscript src/data-preparation/data-merging.R
 
 # Step 5: Analysis
-gen/output/model_summary.pdf gen/output/productivity_vs_rating.pdf gen/output/box_plot.pdf gen/output/scatter_plot.pdf: src/analysis/analysis.R gen/temp/complete_directors_data.tsv.gz
+gen/output/model_summary.pdf gen/output/productivity_vs_rating.pdf gen/output/box_plot.pdf gen/output/scatter_plot.pdf gen/output/genre_category_boxplot.pdf gen/output/genre_versatility_plot.pdf gen/output/correlation_heatmap.pdf: src/analysis/analysis.R gen/temp/complete_directors_data.tsv.gz
 	Rscript src/analysis/analysis.R
 
 # Platform-independent clean rule

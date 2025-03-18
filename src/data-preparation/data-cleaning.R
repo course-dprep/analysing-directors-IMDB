@@ -15,7 +15,7 @@ data_name_basics <- read_tsv("data/name.basics.tsv.gz", na = "\\N")
 # 1.1 Filter for movies
 movies <- data_title_basics %>%
   filter(titleType == "movie") %>%
-  select(tconst, primaryTitle, startYear)
+  select(tconst, primaryTitle, startYear, runtimeMinutes, genres)
 
 # 1.2 Extract directors information
 directors_movie_info <- data_title_crew %>%
