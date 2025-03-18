@@ -1,9 +1,11 @@
 # Cleaning every dataset
 
 ## Load required packages
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse")
 library(tidyverse)
 library(dplyr)
 library(readr)
+if (!requireNamespace("tinytex", quietly = TRUE)) install.packages("tinytex")
 library(tinytex)
 
 ## Loading in data and turning "\N" into actual NA

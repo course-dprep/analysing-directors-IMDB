@@ -1,34 +1,37 @@
 # Analysis of the final directors dataset
 
 ## Load required packages
+if (!requireNamespace("tidyverse", quietly = TRUE)) install.packages("tidyverse")
 library(tidyverse)
 library(dplyr)
 library(readr)
+if (!requireNamespace("tinytex", quietly = TRUE)) install.packages("tinytex")
 library(tinytex)
+if (!requireNamespace("gplots", quietly = TRUE)) install.packages("gplots")
+library(gplots)
 library(ggplot2)
 
 ## Loading in merged directors dataset 
 final_data <- read_tsv("gen/temp/complete_directors_data.tsv.gz")
 
-## 1.1a Multiple linear regression analysis (expanded with genre categories)
-# Original model
-model_1 <- lm(avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility, data = final_data)
-
 # Create the directories if they don't exist
 dir.create("gen", showWarnings = FALSE)
 dir.create("gen/output", showWarnings = FALSE, recursive = TRUE)
 
-## 1.1b Specify the path to save the PDFs
+## 1.1a Multiple linear regression analysis (expanded with genre categories)
+# Original model
+model_1 <- lm(avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility, data = final_data)
+
+## 1.1b Capture the summary as text
+summary_text <- capture.output(summary(model_1))
+
+## 1.1c Specify the path to save the PDFs
 pdf("gen/output/model_summary.pdf")
 
-## 1.1c Print the original model summary to the PDF
-summary_text1 <- paste(capture.output(summary(model_1)), collapse = "\n")
+## 1.1d Print the original model summary to the PDF using textplot
+textplot(summary_text, halign = "left", valign = "top", cex = 0.8)
 
-ggplot() +
-  annotate("text", x = 0.5, y = 0.5, label = summary_text1, hjust = 0, vjust = 1, size = 4, family = "mono") +
-  theme_void()
-
-# 1.1d Close the PDF device
+## 1.1e Close the PDF device
 dev.off()
 
 ## 1.2a Create plot effect number of movies on average movie rating 
