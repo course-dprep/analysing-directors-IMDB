@@ -70,6 +70,48 @@ To proceed with this R project, you'll need several specific packages. If these 
 - library(readr) 
 - library(tinytex) 
 
+To knit RMarkdown documents by using make and your command prompt, the pandoc package needs to be installed and added to your path.
+See below the instructions for this for different types of devices
+
+## Step 1: Install Pandoc
+
+### Windows
+- Download the installer from [Pandoc's official website](https://pandoc.org/installing.html) and install it.
+
+### Mac (Homebrew)
+1. Open **Terminal** (`Cmd + Space`, type `Terminal`, and press Enter).
+2. Install Pandoc using Homebrew:
+   Run: brew install pandoc
+3. Verify the installation:
+   Run: pandoc --version
+
+### Linux (Debian/Ubuntu)
+1. Open **Terminal** (`Ctrl + Alt + T`).
+2. Install Pandoc:
+   Run: sudo apt install pandoc
+3. Verify the installation:
+   Run: pandoc --version
+
+## Step 2: Add Pandoc to System PATH
+
+### Windows
+1. Find the Pandoc installation path (e.g., `C:\Program Files\Pandoc`).
+2. Open **Environment Variables**:
+   - Press `Win + R`, type `sysdm.cpl`, and hit Enter.
+   - Go to **Advanced** → **Environment Variables**.
+3. Under **System variables**, find `Path` → Click **Edit**.
+4. Click **New**, add `C:\Program Files\Pandoc`, and press **OK**.
+
+### Mac/Linux
+1. Add the following line to your shell configuration file (`~/.bashrc`, `~/.zshrc`, or `~/.bash_profile`):
+   Run: export PATH="$HOME/.local/bin:$PATH"
+2. Then apply the changes:
+   Run:source ~/.bashrc  # or source ~/.zshrc
+
+## Step 3: Verify Installation
+Run in **Command Prompt (Windows)** or **Terminal (Mac/Linux)**:
+Run: pandoc --version
+
 ## Running Instructions 
 
 *Provide step-by-step instructions that have to be followed to run this workflow.*
