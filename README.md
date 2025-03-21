@@ -10,7 +10,7 @@
 
 ## Motivation
 
-This study/ is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry
+This study is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry
 
 By analyzing IMDb datasets, we will measure a director’s career length based on the span between their first and last directed movie and compare this to the average IMDb ratings of their films. Additionally, the number of productions attributed to each director will be taken into account, allowing us to explore whether a higher volume of work influences overall ratings.
 
@@ -45,7 +45,7 @@ Variable description
 |  is_action_suspense   |  indicates if the movie belongs to action or suspense genres action, adverture, thriller, crime (1=yes, 2=no)   |
 |  is_speculative |  indicates if the movie belongs to speculative genres horror, mystery, sci-fi, fantasy (1=yes, 2=no)   |
 |  is_non_fiction |  indicates if the movie belongs to non-fiction genres documentary, news, reality-TV, talkshow (1=yes, 2=no)  |
-|  genre_versatality |  amount of genre categories a director has worked in   |
+|  genre_versatality |  amount of genre categories a director has worked on   |
 
 ## Method
 
@@ -53,13 +53,13 @@ To answer this question, a multiple regression analysis is chosen as the primary
 
 Additionally, genre versatility is included in the regression model to account for the possibility that working across multiple genres influences a director’s ability to maintain high ratings.
 
-The regression is as follows: Y = avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility
+The regression model is as follows: Y = avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility
 
 
 ## Preview of Findings 
 The regression results indicate that career length and the number of movies produced significantly affect average IMDb ratings. A negative trend can be observed for both variables, with the effect being stronger for the number of movies produced than for career length.
 
-Genre versatility, while included in the regression, did not yield a significant coefficient in this model. This suggests that the diversity of genres a director works in does not necessarily lead to higher or lower average ratings. However, further research could investigate whether certain combinations of genres contribute more positively to ratings than others. 
+Genre versatility, while included in the regression, did not yield a significant coefficient in this model. This suggests that the diversity of genres a director works in does not necessarily lead to higher or lower average ratings. 
 
 The output is as follows:
 
@@ -81,7 +81,7 @@ Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 **R² = 0.89**, **Adjusted R² = 0.87**, **F-statistic = 45.67**, **p-value = 0.000001**
 
-Based on this regression table, both career length and the amount of movies produced has a significant effect on the average movie ratings. A negative trend can be observed for both variables, however, the effect is stronger for the amount of movies produced as for the career length. This is better visible in the scatter plots included in the Rmd file.
+The effect of career length and the amount of movies produced on the average movie ratings is better visible in the scatter plots included in the Rmd file.
 
 The regression findings provide valuable insights for the film industry, guiding decisions in talent selection, budget allocation, and marketing strategies. For professionals such as producers and studio executives, the data suggests that directors with longer careers may produce films with declining ratings over time. This could prompt studios to focus on directors with shorter, more consistent track records and allocate budgets to those prioritizing quality over quantity. Marketing efforts could also emphasize high-rated works rather than an entire career.
 
@@ -244,4 +244,7 @@ To update your branch with the latest changes from the main branch:
 
 This project is set up as part of the Master's course [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/) at the [Department of Marketing](https://www.tilburguniversity.edu/about/schools/economics-and-management/organization/departments/marketing), [Tilburg University](https://www.tilburguniversity.edu/), the Netherlands.
 
-The project is implemented by team < x > members: < insert member details>
+The project is implemented by team < 3 > members: 
+- Joël de Vries
+- Edwin den Dikkenberg 
+- Paulien Beeker 2071432
