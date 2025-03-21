@@ -10,11 +10,13 @@
 
 ## Motivation
 
-This study is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry
+This study/ is relevant as it can provide insights into whether experience plays a significant role in filmmaking success, informing both aspiring and established directors, film producers, and scholars studying the film industry
 
+By analyzing IMDb datasets, we will measure a director’s career length based on the span between their first and last directed movie and compare this to the average IMDb ratings of their films. Additionally, the number of productions attributed to each director will be taken into account, allowing us to explore whether a higher volume of work influences overall ratings.
 
+Furthermore, genre versatility—the number of different genre categories a director has worked in—will be considered as a control variable. Directors who have experience across multiple genres may demonstrate greater adaptability and creative range, which could positively influence audience appreciation and ratings. On the other hand, directors specializing in specific genres might develop a strong niche following, potentially leading to higher ratings within their expertise.
 
-By analyzing IMDb datasets, we will measure a director’s career length based on the span between their first and last directed movie and compare this to the average IMDb ratings of their films. Additionally, the number of productions attributed to each director will be taken into account, allowing us to explore whether a higher volume of work influences overall ratings. The findings could provide insight into whether experience and productivity correlate with higher audience appreciation
+The findings could provide insight into whether experience, productivity, and creative diversity correlate with higher audience appreciation.
 
 ## Research question
 'Do directors with a long career have better-rated movies?'
@@ -38,22 +40,33 @@ Variable description
 | num_movies  |  total amount of movies produced per director  |
 | avg_rating  |  average rating of movies produced rated from 0-10  |
 | career_category |  short (<10 years), medium (10-30 years), long (>30 years) |
-|  control variables |  NOG TOEVOEGEN  |
+|  is_dramatic |  indicates if the movie belongs to the dramatic genres drama, biography, history (1=yes, 2=no)  |
+|  is_light_action   |  indicates if the movie belongs to the light entertainment genres comedy, musical, music (1=yes, 2=no) |
+|  is_action_suspense   |  indicates if the movie belongs to action or suspense genres action, adverture, thriller, crime (1=yes, 2=no)   |
+|  is_speculative |  indicates if the movie belongs to speculative genres horror, mystery, sci-fi, fantasy (1=yes, 2=no)   |
+|  is_non_fiction |  indicates if the movie belongs to non-fiction genres documentary, news, reality-TV, talkshow (1=yes, 2=no)  |
+|  genre_versatality |  amount of genre categories a director has worked in   |
 
 ## Method
 
-To answer this question, a multiple regression analysis is chosen as the primary research method. Regression is well-suited for this study because it allows us to examine the relationship between a director’s career length and the average IMDb rating of their movies while also considering the number of productions they have directed. By applying a multiple linear regression model, we can determine whether a longer career and/or a higher number of directed movies are associated with better ratings, while controlling for potential variability. Additionally, a boxplot analysis is included to categorize directors into career-length groups, and a scatter plot will be used to explore the relationship between the number of movies directed and IMDb ratings. This combination of methods ensures a comprehensive and statistically sound approach to answering the research question.
+To answer this question, a multiple regression analysis is chosen as the primary research method. Regression is well-suited for this study because it allows us to examine the relationship between a director’s career length and the average IMDb rating of their movies while also considering the number of productions they have directed.
+
+Additionally, genre versatility is included in the regression model to account for the possibility that working across multiple genres influences a director’s ability to maintain high ratings.
 
 The regression is as follows: Y = avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility
 
 
 ## Preview of Findings 
-To investigate the effect of career length (short vs medium vs long) and the amount of movies produced per director on average movie ratings, a multiple linear regression was conducted. The output is as follows:
+The regression results indicate that career length and the number of movies produced significantly affect average IMDb ratings. A negative trend can be observed for both variables, with the effect being stronger for the number of movies produced than for career length.
+
+Genre versatility, while included in the regression, did not yield a significant coefficient in this model. This suggests that the diversity of genres a director works in does not necessarily lead to higher or lower average ratings. However, further research could investigate whether certain combinations of genres contribute more positively to ratings than others. 
+
+The output is as follows:
 
 | Predictor  | Coefficient (β) | Std. Error | t-value | p-value  | significance code |
 |------------|---------------|------------|---------|---------|--------|
-| Intercept   | 6.194e+00   | 7.959e−03 778.250 | < 2e−16 |   *** |
-| career_length | −3.437e−03 |   4.459e−04 −7.708 |   1.28e−14 |  ***   |
+| Intercept   | 6.194e+00   | 7.959e−03 | 778.250 | < 2e−16 |  *** |  
+| career_length | −3.437e−03 |   4.459e−04 | −7.708 |   1.28e−14 |  ***   |
 |  num_movies  | 4.481e−03 | 5.093e−04 | 8.798  | < 2e−16   | *** |
 |  avg_runtime | −5.469e−06   | 1.369e−05 | −0.399 | 0.69   |  |
 |  avg_numVotes   | 4.476e−06 | 1.910e−07 | 23.437 | < 2e−16   | *** |
@@ -67,8 +80,6 @@ To investigate the effect of career length (short vs medium vs long) and the amo
 Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 **R² = 0.89**, **Adjusted R² = 0.87**, **F-statistic = 45.67**, **p-value = 0.000001**
-
-
 
 Based on this regression table, both career length and the amount of movies produced has a significant effect on the average movie ratings. A negative trend can be observed for both variables, however, the effect is stronger for the amount of movies produced as for the career length. This is better visible in the scatter plots included in the Rmd file.
 
