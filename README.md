@@ -92,7 +92,30 @@ Academically, the study opens avenues for research on the impact of career longe
 
 ## Repository Overview 
 
-**Include a tree diagram that illustrates the repository structure*
+ANALYSING-DIRECTORS-IMDB/
+├── data/                     # Raw data files
+├── gen/                      # Generated output from the pipeline
+│   ├── temp/                 # Cleaned datasets and merged dataset
+│   └── output/               # Graphs, tables, and final report (as knitted PDF)
+├── reporting/                # Report (RMarkdown file)
+│   ├── report.Rmd
+│   └── start_app.R
+├── src/                      # Source scripts for data processing and analysis
+│   ├── analysis/             # Script for analysis
+│   │   ├── .Rhistory
+│   │   └── analysis.R
+│   ├── data-download/        # Script for downloading data
+│   │   └── download-data.R
+│   ├── data-exploration/     # Script for exploratory data analysis
+│   │   ├── .Rhistory
+│   │   └── data.exploration.Rmd
+│   ├── data-preparation/     # Scripts for data cleaning and merging
+│   │   ├── .Rhistory
+│   │   ├── data-cleaning.R
+│   │   └── data-merging.R
+├── .gitignore                # Files and folders to ignore in Git
+├── makefile                  # Automation of workflow
+└── README.md                 # Project documentation
 
 ## Dependencies 
 
@@ -146,7 +169,76 @@ Run: pandoc --version
 
 ## Running Instructions 
 
-*Provide step-by-step instructions that have to be followed to run this workflow.*
+### Prequisites 
+Ensure you have the following installed:
+•	R (update if necessary)
+•	RStudio (Optional but recommended)
+•	GNU Make
+•	Git
+
+Also make sure that RScript can be run via your command prompt
+
+### Clone or fork the repository
+•	Option 1: Clone the repository
+If you have write access and want to work on the main repository, run:
+-> git clone https://github.com/course-dprep/analysing-directors-IMDB.git
+-> cd "your_path"/analysing-directors-IMDB
+
+•	Option 2: Fork and Clone the Repository
+If you do not have write access or prefer to work independently before submitting changes, follow these steps:
+-> Go to https://github.com/course-dprep/analysing-directors-IMDB.
+-> Click the Fork button in the top right corner.
+
+This will create a copy of the repository under your GitHub account (e.g., https://github.com/yourusername/analysing-directors-IMDB).
+
+Clone Your Forked Repository:
+Replace yourusername with your actual GitHub username and run:
+
+-> git clone https://github.com/yourusername/analysing-directors-IMDB.git
+-> cd "your_path"/analysing-directors-IMDB
+
+Set Up the Upstream Repository (Optional but recommended):
+This allows you to keep your fork in sync with the original repository:
+-> git remote add upstream https://github.com/course-dprep/analysing-directors-IMDB.git
+-> git fetch upstream
+
+### Use `make` for Reproducibility
+This project is automated using `Makefile`, which ensures all steps (downloading data, processing, analysis, and report generation) are executed efficiently.
+
+### Running the Full Pipeline
+To run the entire analysis pipeline, execute the following in your command prompt:
+-> make
+Make sure you set your directory to your local repository of the project
+
+Running `make` will:
+1.	Download necessary datasets (data/download-data.R)
+2. Explore the original datasets (src/data.exploration)
+3.	Clean and merge data (src/data-cleanin.R & src/data-merging.R)
+4.	Perform analysis (src/analysis.R)
+5. Store output of the exploration and analysis (gen/output)
+6.	Knit the complete research paper of this project (report.Rmd)
+
+To remove generated files and start fresh, run the following in your command prompt:
+-> make clean
+
+### Github collaboration
+•	Branching workflow
+1.	Create a new branch for your feature:
+-> git checkout -b feature-branch
+2. Make changes and commit them: 
+-> git add <filename(s)>
+-> git commit -m "Describe your changes"
+3. Push to GitHub
+-> git push origin feature-branch
+4. Open a Pull Request on GitHub and request a review
+
+•	Keep your branch up to date
+To update your branch with the latest changes from the main branch:
+-> git checkout main
+-> git pull origin main
+-> git checkout feature-branch
+-> git merge main
+
 
 ## About 
 
