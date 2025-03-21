@@ -81,7 +81,30 @@ Academically, the study opens avenues for research on the impact of career longe
 
 ## Repository Overview 
 
-**Include a tree diagram that illustrates the repository structure*
+ANALYSING-DIRECTORS-IMDB/
+├── data/                     # Raw data files
+├── gen/                      # Generated output from the pipeline
+│   ├── temp/                 # Cleaned datasets and merged dataset
+│   └── output/               # Graphs, tables, and final report (as knitted PDF)
+├── reporting/                # Report (RMarkdown file)
+│   ├── report.Rmd
+│   └── start_app.R
+├── src/                      # Source scripts for data processing and analysis
+│   ├── analysis/             # Script for analysis
+│   │   ├── .Rhistory
+│   │   └── analysis.R
+│   ├── data-download/        # Script for downloading data
+│   │   └── download-data.R
+│   ├── data-exploration/     # Script for exploratory data analysis
+│   │   ├── .Rhistory
+│   │   └── data.exploration.Rmd
+│   ├── data-preparation/     # Scripts for data cleaning and merging
+│   │   ├── .Rhistory
+│   │   ├── data-cleaning.R
+│   │   └── data-merging.R
+├── .gitignore                # Files and folders to ignore in Git
+├── makefile                  # Automation of workflow
+└── README.md                 # Project documentation
 
 ## Dependencies 
 
