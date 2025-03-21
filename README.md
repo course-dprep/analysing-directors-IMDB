@@ -92,6 +92,7 @@ Academically, the study opens avenues for research on the impact of career longe
 
 ## Repository Overview 
 
+```
 ANALYSING-DIRECTORS-IMDB/
 ├── data/                     # Raw data files
 ├── gen/                      # Generated output from the pipeline
@@ -116,17 +117,20 @@ ANALYSING-DIRECTORS-IMDB/
 ├── .gitignore                # Files and folders to ignore in Git
 ├── makefile                  # Automation of workflow
 └── README.md                 # Project documentation
+```
 
 ## Dependencies 
 
-To proceed with this R project, you'll need several specific packages. If these aren't already on your system, you can acquire them using the install.packages() command. For those packages you've previously installed, activate them with the library() function.
-- library(tidyverse) 
-- library(dplyr) 
-- library(readr) 
-- library(tinytex) 
+To proceed with this R project, you'll need several specific packages. If these aren't already on your system, the Rscripts that are run by the makefile will automatically install these. The packages will also be activated automatically with the library() function.
+Here an overview of used packages in this project
+- tidyverse
+- dplyr
+- readr 
+- tinytex
+- gplots
 
 To knit RMarkdown documents by using make and your command prompt, the pandoc package needs to be installed and added to your path.
-See below the instructions for this for different types of devices
+See below the instructions for this on different types of devices
 
 ## Step 1: Install Pandoc
 
@@ -245,6 +249,6 @@ To update your branch with the latest changes from the main branch:
 This project is set up as part of the Master's course [Data Preparation & Workflow Management](https://dprep.hannesdatta.com/) at the [Department of Marketing](https://www.tilburguniversity.edu/about/schools/economics-and-management/organization/departments/marketing), [Tilburg University](https://www.tilburguniversity.edu/), the Netherlands.
 
 The project is implemented by team < 3 > members: 
-- Joël de Vries
-- Edwin den Dikkenberg 
+- Joël de Vries 2124158
+- Edwin den Dikkenberg 792240
 - Paulien Beeker 2071432
