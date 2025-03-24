@@ -1,12 +1,20 @@
-# You can use this file (or similar ones) to work on a report. 
-# Of course, you need to replace them with actual RMarkdown files eventually.
+# The impact of the career length of directors on their IMDb ratings
 
----
-title: "Impact of career length on movie ratings"
+----
+title: "The impact of the career length of directors on their IMDb ratings"
 author: "Joël de Vries, Edwin van den Dikkenberg, Paulien Beeker"
 date: "2025-03-22"
 output: pdf_document
 ----
+
+```{r include=FALSE}
+## Installing and loading necessary packages
+if (!requireNamespace("tinytex", quietly = TRUE)) install.packages("tinytex")
+library(tinytex)
+if (!requireNamespace("knitr", quietly = TRUE)) install.packages("knitr")
+library(knitr)
+```
+
 
 ## Introduction
 
@@ -24,15 +32,17 @@ The findings could provide insight into whether experience, productivity, and cr
 
 ## Data
 
-The research was conducted based on the following datasets extracted from imdb
--  "title.basics" = "https://datasets.imdbws.com/title.basics.tsv.gz",
--  "title.crew" = "https://datasets.imdbws.com/title.crew.tsv.gz",
--  "title.ratings" = "https://datasets.imdbws.com/title.ratings.tsv.gz",
--  "name.basics" = "https://datasets.imdbws.com/name.basics.tsv.gz"
+The research was conducted based on the following datasets extracted from IMDb
 
-After merging the required data, a sample was taken to be able to conduct a more in-depth analysis. The final data set used extract the results contained entries.
+-  `"title.basics"` = <https://datasets.imdbws.com/title.basics.tsv.gz>  
+-  `"title.crew"` = <https://datasets.imdbws.com/title.crew.tsv.gz>  
+-  `"title.ratings"` = <https://datasets.imdbws.com/title.ratings.tsv.gz>  
+-  `"name.basics"` = <https://datasets.imdbws.com/name.basics.tsv.gz>
 
-Variable description
+Further exploration of the original dataset can be found in the following document:
+- "gen/output/data.exploration"
+
+### Variable description
 
 | Variable name     | Variable explanation | 
 |--------------|--------------------|
@@ -40,6 +50,8 @@ Variable description
 | career_end | year of production of the last movie directed                 | 
 | career_length  |   total length of a director's career, calculated as career_end - career_start               | 
 | num_movies  |  total amount of movies produced per director  |
+| avg_runtime  |  average runtime of movies per director  |
+| avg_numVotes  |  average number of votes for movies per director  |
 | avg_rating  |  average rating of movies produced rated from 0-10  |
 | career_category |  short (<10 years), medium (10-30 years), long (>30 years) |
 |  is_dramatic |  indicates if the movie belongs to the dramatic genres drama, biography, history (1=yes, 2=no)  |
@@ -58,38 +70,48 @@ Additionally, genre versatility is included in the regression model to account f
 The regression model is as follows: Y = avg_rating ~ career_length + num_movies + avg_runtime + avg_numVotes + is_dramatic + is_light_entertainment + is_action_suspense + is_speculative + is_non_fiction + genre_versatility
 
 ## Analysis
+### Box plot career length categories
+Before the multiple regression analysis was run, a box plot was computed to show the differences between a short (<10 years), medium (10-30 years), and long (>30 years) director career on the effect of the IMDb rating.
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("../gen/output/box_plot.pdf")
+```
 
-NOG TOEVOEGEN
+### Box plot genre categories
+
+To further investigate the effect of the controle variable genre category, another box plot was created to give insight into the effect of genre category on IMDb ratings.
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("../gen/output/genre_category_boxplot.pdf")
+```
+
+### Box plot genre versatility
+
+To show the effect of genre versatility (how many different genres) of a director on the IMDb ratings, another box plot was computed. 
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("../gen/output/genre_versatility_plot.pdf")
+```
+
+### Scatter plot productivity
+
+To get more insight into the effect of the productivity of a director on the film rating, a scatter plot was created. This shows relation between the number of movies that a director direct and the average IMDb rating of all the movies of that particular director.
+```{r, echo=FALSE, out.width="70%"}
+knitr::include_graphics("../gen/output/productivity_vs_rating.pdf")
+```
+
+### Multiple regression analysis
+
+Finally, the multiple regression model, including the independent variable "career length" and all the control variables was run (see Methodology). The regression analysis resulted in the output displayed below.
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("../gen/output/model_summary.pdf")
+```
 
 ## Findings
 
-The regression results indicate that career length and the number of movies produced significantly affect average IMDb ratings. A negative trend can be observed for both variables, with the effect being stronger for the number of movies produced than for career length.
+The analysis shows that career length has a small but significant negative impact on IMDb ratings. Directors with longer careers tend to see a decline in their average ratings. Similarly, directors who produce a high number of films tend to have lower average ratings, suggesting that prioritizing quantity over quality may lead to diminishing returns.
 
-Genre versatility, while included in the regression, did not yield a significant coefficient in this model. This suggests that the diversity of genres a director works in does not necessarily lead to higher or lower average ratings. 
+Genre categories significantly influence ratings. Non-fiction and dramatic films tend to receive higher scores, while speculative and action/suspense genres generally score lower. However, genre versatility does not appear to have a significant effect on ratings, indicating that working across multiple genres does not necessarily improve or reduce audience appreciation.
 
-The output is as follows:
+The multiple regression analysis confirms these trends, showing that career length, number of movies directed, and genre category are key factors influencing IMDb ratings. The regression results indicate that career length and the number of movies produced significantly affect average IMDb ratings. A negative trend can be observed for both variables, with the effect being stronger for the number of movies produced than for career length.
 
-| Predictor  | Coefficient (β) | Std. Error | t-value | p-value  | significance code |
-|------------|---------------|------------|---------|---------|--------|
-| Intercept   | 6.194e+00   | 7.959e−03 | 778.250 | < 2e−16 |  *** |  
-| career_length | −3.437e−03 |   4.459e−04 | −7.708 |   1.28e−14 |  ***   |
-|  num_movies  | 4.481e−03 | 5.093e−04 | 8.798  | < 2e−16   | *** |
-|  avg_runtime | −5.469e−06   | 1.369e−05 | −0.399 | 0.69   |  |
-|  avg_numVotes   | 4.476e−06 | 1.910e−07 | 23.437 | < 2e−16   | *** |
-|  is_dramatic | 1.598e−01 | 7.465e−03 | 21.408 | < 2e−16   | *** |
-|  is_light_entertainment  | −1.114e−01   | 7.439e−03 | −14.982   | < 2e−16   | *** |
-|  is_action_suspense   | −2.518e−01   | 7.808e−03 | −32.249   | < 2e−16   | *** |
-|  is_speculative | −6.054e−01   | 8.403e−03 | −72.045  | < 2e−16 | *** |
-|  is_non_fiction | 8.783e−01 | 8.095e−03 | 108.500   | < 2e−16   | *** |
-|  genre_versatility | NA  | NA  | NA  | NA  |
-
-Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-**R² = 0.89**, **Adjusted R² = 0.87**, **F-statistic = 45.67**, **p-value = 0.000001**
-
-## Plots
-
-NOG TOEVOEGEN
 
 ## Conclusion
 
@@ -101,6 +123,3 @@ For streaming platforms like Netflix and Amazon Prime, the results are important
 
 Academically, the study opens avenues for research on the impact of career longevity on creative output, exploring whether long careers contribute positively or negatively to film quality. It also invites comparisons with other creative industries like music and literature, highlighting potential industry-specific trends and the influence of genre demands on a director's performance.
 
-## References
-
-Als we die hebben, nog toevoegen!
