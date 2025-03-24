@@ -19,7 +19,7 @@ Furthermore, genre versatility—the number of different genre categories a dire
 The findings could provide insight into whether experience, productivity, and creative diversity correlate with higher audience appreciation.
 
 ## Research question
-'Do directors with a long career have better-rated movies?'
+'Does career length of directors have an effect on their IMDb ratings?'
 
 ## Data
 The research was conducted based on the following datasets extracted from imdb
@@ -38,6 +38,8 @@ Variable description
 | career_end | year of production of the last movie directed                 | 
 | career_length  |   total length of a director's career, calculated as career_end - career_start               | 
 | num_movies  |  total amount of movies produced per director  |
+| avg_runtime  |  average runtime of movies per director  |
+| avg_numVotes  |  average number of votes for movies per director  |
 | avg_rating  |  average rating of movies produced rated from 0-10  |
 | career_category |  short (<10 years), medium (10-30 years), long (>30 years) |
 |  is_dramatic |  indicates if the movie belongs to the dramatic genres drama, biography, history (1=yes, 2=no)  |
