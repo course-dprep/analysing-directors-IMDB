@@ -1,10 +1,3 @@
-> **Important:** This is a template repository to help you set up your team project.  
->  
-> You are free to modify it based on your needs. For example, if your data is downloaded using *multiple* scripts instead of a single one (as shown in `\data\`), structure the code accordingly. The same applies to all other starter files—adapt or remove them as needed.  
->  
-> Feel free to delete this text.
-
-
 # Impact of director career length on movie ratings
 *This project aims to analyze the relationship between a director's career length and the quality of their movies as measured by ratings extracted from IMBd* 
 
@@ -224,7 +217,7 @@ Running `make` will:
 5. Store output of the exploration and analysis (gen/output)
 6.	Knit the complete research paper of this project (report.Rmd)
 
-To remove generated files and start fresh, run the following in your command prompt:
+To remove generated files (including the report) and start fresh, run the following in your command prompt:
 -> make clean
 
 ### Github collaboration
